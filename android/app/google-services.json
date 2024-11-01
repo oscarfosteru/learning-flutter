@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "153838541528",
+    "project_id": "mireles-99c30",
+    "storage_bucket": "mireles-99c30.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:153838541528:android:bf7adf43780bbe424c55ad",
+        "android_client_info": {
+          "package_name": "com.example.empty"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD1lPJVMCB-S9eo0E7Nu4emDJP1BIS1pfQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:153838541528:android:86fba0c2868f919a4c55ad",
+        "android_client_info": {
+          "package_name": "com.mireles.restaurantapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD1lPJVMCB-S9eo0E7Nu4emDJP1BIS1pfQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
