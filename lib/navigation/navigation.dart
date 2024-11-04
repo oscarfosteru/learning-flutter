@@ -1,4 +1,5 @@
 import 'package:empty/modules/profile/screens/profile.dart';
+import 'package:empty/modules/profile/screens/map.dart';
 import 'package:empty/modules/reservations/screens/list';
 import 'package:empty/modules/top/screens/list.dart';
 import 'package:empty/navigation/home.dart';
@@ -15,6 +16,7 @@ class _NavigationState extends State<Navigation> {
   int _selectedIndex = 0;
   static const List<Widget> _widgetOptions = <Widget>[
     Home(),
+    MapSample(),
     TopFiveScreen(),
     ReservationListScreen(),
     Profile(),
@@ -35,6 +37,10 @@ class _NavigationState extends State<Navigation> {
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
             label: 'Inicio',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.map),
+            label: 'Mapa',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.star),
