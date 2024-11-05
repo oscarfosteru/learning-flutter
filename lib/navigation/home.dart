@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:empty/modules/home/entities/restaurant.dart';
-import 'package:empty/modules/home/screens/content_column.dart';
 import 'package:empty/modules/widgets/details_restaurant.dart';
 import 'package:empty/modules/widgets/list_restaurant_data.dart';
 import 'package:flutter/material.dart';
@@ -33,6 +32,8 @@ class _HomeState extends State<Home> {
             List<String>.from(doc['images']),
             doc['rating'],
             doc['count'],
+            doc['x'],
+            doc['y'],
           );
         }).toList();
         restaurants.clear();

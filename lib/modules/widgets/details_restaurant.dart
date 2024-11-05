@@ -1,4 +1,7 @@
+
+import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:flutter_rating/flutter_rating.dart';
 import 'package:empty/modules/home/entities/restaurant.dart';
 
@@ -14,6 +17,34 @@ class DetailsRestaurant extends StatefulWidget {
 class _DetailsRestaurantState extends State<DetailsRestaurant> {
   int _currentIndex = 0;
   final PageController _pageController = PageController();
+  final Completer<GoogleMapController> _mapController = Completer();
+  CameraPosition? _restaurantPosition;
+  Marker? _restaurantMarker;
+
+  @override
+  void initState() {
+    super.initState();
+    _initializeMap();
+  }
+
+  void _initializeMap() {
+    // Obtiene las coordenadas del restaurante
+    final LatLng restaurantLocation =
+        LatLng(widget.restaurant.x.toDouble(), widget.restaurant.y.toDouble());
+
+    // Configura la posición de la cámara
+    _restaurantPosition = CameraPosition(
+      target: restaurantLocation,
+      zoom: 14.4746,
+    );
+
+    // Configura el marcador para la ubicación del restaurante
+    _restaurantMarker = Marker(
+      markerId: const MarkerId('restaurantLocation'),
+      position: restaurantLocation,
+      infoWindow: InfoWindow(title: widget.restaurant.name),
+    );
+  }
 
   @override
   void dispose() {
@@ -33,6 +64,7 @@ class _DetailsRestaurantState extends State<DetailsRestaurant> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              // Carousel de imágenes
               SizedBox(
                 height: 200,
                 child: PageView.builder(
@@ -75,6 +107,7 @@ class _DetailsRestaurantState extends State<DetailsRestaurant> {
                 ),
               ),
               const SizedBox(height: 8),
+              // Indicador de posición en el carrusel de imágenes
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: widget.restaurant.images.asMap().entries.map((entry) {
@@ -102,14 +135,14 @@ class _DetailsRestaurantState extends State<DetailsRestaurant> {
                 }).toList(),
               ),
               const SizedBox(height: 16),
+              // Nombre del restaurante
               Text(
                 widget.restaurant.name,
-                style: const TextStyle(
-                  fontSize: 24,
-                  fontWeight: FontWeight.bold,
-                ),
+                style:
+                    const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
               ),
               const SizedBox(height: 8),
+              // Calificación
               StarRating(
                 rating: widget.restaurant.rating,
                 starCount: 5,
@@ -118,6 +151,7 @@ class _DetailsRestaurantState extends State<DetailsRestaurant> {
                 borderColor: Colors.grey,
               ),
               const SizedBox(height: 8),
+              // Descripción
               Text(
                 widget.restaurant.description,
                 style: const TextStyle(fontSize: 16),
@@ -125,9 +159,19 @@ class _DetailsRestaurantState extends State<DetailsRestaurant> {
               const SizedBox(height: 8),
               Text(
                 'Reviews: ${widget.restaurant.count}',
-                style: const TextStyle(
-                  fontSize: 14,
-                  color: Colors.grey,
+                style: const TextStyle(fontSize: 14, color: Colors.grey),
+              ),
+              const SizedBox(height: 16),
+              // Mapa de Google mostrando la ubicación del restaurante
+              SizedBox(
+                height: 250,
+                child: GoogleMap(
+                  initialCameraPosition: _restaurantPosition!,
+                  markers:
+                      _restaurantMarker != null ? {_restaurantMarker!} : {},
+                  onMapCreated: (GoogleMapController controller) {
+                    _mapController.complete(controller);
+                  },
                 ),
               ),
             ],
