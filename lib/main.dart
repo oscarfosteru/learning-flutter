@@ -9,16 +9,15 @@ import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart'; 
 import 'firebase_options.dart'; 
 import 'package:empty/modules/auth/screens/register.dart';
+import 'package:empty/modules/tutorial/screens/tutorial.dart'; // Asegúrate de tener esta importación
 
 void main() async {
-  WidgetsFlutterBinding.ensureInitialized(); // Asegura la inicialización completa
-
-  // Inicialización de Firebase
+  WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
-  runApp(const MainApp()); // Ejecuta la aplicación principal
+  runApp(const MainApp());
 }
 
 class MainApp extends StatelessWidget {
@@ -27,18 +26,18 @@ class MainApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      debugShowCheckedModeBanner: false, // Oculta la etiqueta de modo debug
+      debugShowCheckedModeBanner: false,
       initialRoute: '/login', // Ruta inicial
       routes: {
         '/': (context) => const SplashScreen(),
-        '/login': (context) => const LoginTrue(), // Pantalla de inicio de sesión
+        '/login': (context) => const LoginTrue(),
         '/menu': (context) => const Navigation(),
         '/home': (context) => const Home(),
         '/top': (context) => const TopFiveScreen(),
         '/reservations': (context) => const ReservationListScreen(),
         '/profile': (context) => const Profile(),
         '/register': (context) => const Register(),
-        
+        '/tutorial': (context) => const Tutorial(), // Agrega la ruta para el tutorial
       },
     );
   }
